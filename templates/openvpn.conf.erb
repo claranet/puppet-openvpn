@@ -17,7 +17,7 @@ resolv-retry infinite
 nobind
 <% end -%>
 <% scope.lookupvar('openvpn::routes').each do |route| -%>
-route <%= @route %>
+route <%= route %>
 <% end -%>
 persist-key
 persist-tun
