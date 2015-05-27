@@ -1,0 +1,26 @@
+ca /etc/openvpn/keys/ca.crt
+cert /etc/openvpn/keys/local.crt
+key /etc/openvpn/keys/local.key
+proto udp
+comp-lzo
+dev tun
+<% if scope.lookupvar('openvpn::mode') == "server" -%>
+mode server
+dh /etc/openvpn/keys/dh.pem
+tls-server
+port 1194
+server <%= scope.lookupvar('openvpn::network') %> <%= scope.lookupvar('openvpn::netmask') %>
+<% elsif scope.lookupvar('openvpn::mode') == "client" %>
+client
+auth-retry none
+resolv-retry infinite
+nobind
+<% end -%>
+<% scope.lookupvar('openvpn::routes').each do |route| -%>
+route <%= @route %>
+<% end -%>
+persist-key
+persist-tun
+user nobody
+group nobody
+
