@@ -11,16 +11,19 @@ class openvpn (
   $ca_crt,
   $cert,
   $key,
-  $dh           = undef,
-  $mode         = 'client', # client or server
-  $network      = undef, # needed only for server
-  $netmask      = undef,
-  $routes       = [],
-  $package_name = $::openvpn::params::package_name,
-  $service_name = $::openvpn::params::service_name,
+  $dh            = undef,
+  $mode          = 'client', # client or server
+  $network       = undef, # needed only for server
+  $netmask       = undef,
+  $routes        = [],
+  $push          = [],
+  $client2client = false,
+  $package_name  = $::openvpn::params::package_name,
+  $service_name  = $::openvpn::params::service_name,
 ) inherits ::openvpn::params {
 
-
+  validate_array($routes)
+  validate_array($push)
   case $mode {
     'server': {
       unless (is_ip_address($network)) {

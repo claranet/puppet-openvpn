@@ -10,6 +10,12 @@ dh /etc/openvpn/keys/dh.pem
 tls-server
 port 1194
 server <%= scope.lookupvar('openvpn::network') %> <%= scope.lookupvar('openvpn::netmask') %>
+<% scope.lookupvar('openvpn::push').each do |push| -%>
+push <%= push %>
+<% end -%>
+<% if scope.lookupvar('client2client') -%>
+client2client
+<% end -%>
 <% elsif scope.lookupvar('openvpn::mode') == "client" %>
 client
 auth-retry none
