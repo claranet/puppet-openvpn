@@ -18,6 +18,7 @@ client2client
 <% end -%>
 <% elsif scope.lookupvar('openvpn::mode') == "client" %>
 client
+remote <%= scope.lookupvar('openvpn::remote') %>
 auth-retry none
 resolv-retry infinite
 nobind

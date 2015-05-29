@@ -13,6 +13,7 @@ class openvpn (
   $key,
   $dh            = undef,
   $mode          = 'client', # client or server
+  $remote        = undef, # Needed only for client
   $network       = undef, # needed only for server
   $netmask       = undef,
   $routes        = [],
@@ -34,6 +35,9 @@ class openvpn (
       }
     }
     'client': {
+      unless ($remote) {
+        fail('You must specify remote in client mode')
+      }
     }
     default: {
       fail('mode must be either server or client')
