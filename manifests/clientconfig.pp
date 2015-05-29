@@ -8,5 +8,6 @@ define openvpn::clientconfig ($config = []) {
     group    => 'root',
     mode     => '0644',
     template => template('openvpn/clientconfig.erb'),
+    require  => File['/etc/openvpn/ccd'],
   }
 }

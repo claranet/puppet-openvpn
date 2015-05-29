@@ -18,6 +18,7 @@ class openvpn (
   $netmask       = undef,
   $routes        = [],
   $push          = [],
+  $clientconfig  = {},
   $client2client = false,
   $package_name  = $::openvpn::params::package_name,
   $service_name  = $::openvpn::params::service_name,
@@ -33,6 +34,7 @@ class openvpn (
       unless (is_ip_address($netmask)) {
         fail('You must specify netmask')
       }
+      create_resources('::openvpn::clientconfig',$clientconfig)
     }
     'client': {
       unless ($remote) {
