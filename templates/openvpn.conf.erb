@@ -16,6 +16,7 @@ push <%= push %>
 <% if scope.lookupvar('client2client') -%>
 client2client
 <% end -%>
+client-config-dir /etc/openvpn/ccd
 <% elsif scope.lookupvar('openvpn::mode') == "client" %>
 client
 remote <%= scope.lookupvar('openvpn::remote') %>

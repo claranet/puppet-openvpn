@@ -26,6 +26,13 @@ class openvpn::config {
     group  => 'root',
   }
 
+  file { '/etc/openvpn/ccd':
+    ensure => directory,
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+  }
+
   file { '/etc/openvpn/keys/ca.crt':
     ensure  => present,
     mode    => '0644',
