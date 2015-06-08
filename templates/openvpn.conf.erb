@@ -13,7 +13,7 @@ server <%= scope.lookupvar('openvpn::network') %> <%= scope.lookupvar('openvpn::
 <% scope.lookupvar('openvpn::push').each do |push| -%>
 push <%= push %>
 <% end -%>
-<% if scope.lookupvar('client2client') -%>
+<% if scope.lookupvar('openvpn::client2client') -%>
 client2client
 <% end -%>
 client-config-dir /etc/openvpn/ccd
