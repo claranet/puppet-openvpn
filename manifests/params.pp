@@ -8,15 +8,32 @@ class openvpn::params {
     'Debian': {
       $package_name = 'openvpn'
       $service_name = 'openvpn'
+      case $::operatingsystem {
+        'Debian': {
+          case $::operatingsystemmajrelease {
+            '8': {
+              $service_provider = 'systemd'
+            }
+            default: {
+              $service_name = 'debian'
+            }
+          }
+        }
+        'Ubuntu': {
+          $service_name = 'upstart'
+        }
+      }
     }
     'RedHat', 'Amazon': {
       $package_name = 'openvpn'
       case $::operatingsystemmajrelease {
         '7': {
           $service_name = 'openvpn@openvpn'
+          $service_provider = 'systemd'
         }
         default: {
           $service_name = 'openvpn'
+          $service_provider = 'init'
         }
       }
     }

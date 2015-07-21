@@ -8,6 +8,7 @@ class openvpn::service {
   service { $::openvpn::service_name:
     ensure     => running,
     enable     => true,
+    provider   => $::openvpn::params::service_provider,
     hasstatus  => true,
     hasrestart => true,
   }
