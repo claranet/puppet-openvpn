@@ -15,7 +15,7 @@ class openvpn::params {
               $service_provider = 'systemd'
             }
             default: {
-              $service_name = 'debian'
+              $service_provider = 'debian'
             }
           }
         }
