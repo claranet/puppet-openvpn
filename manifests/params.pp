@@ -4,12 +4,12 @@
 # It sets variables according to platform.
 #
 class openvpn::params {
-  $service_username = 'nobody'
+  $service_user = 'nobody'
   case $::osfamily {
     'Debian': {
       $package_name = 'openvpn'
       $service_name = 'openvpn'
-      $service_groupname = 'nogroup'
+      $service_group = 'nogroup'
       case $::operatingsystem {
         'Debian': {
           case $::operatingsystemmajrelease {
@@ -28,7 +28,7 @@ class openvpn::params {
     }
     'RedHat', 'Amazon': {
       $package_name = 'openvpn'
-      $service_groupname = 'nobody'
+      $service_group = 'nobody'
       case $::operatingsystemmajrelease {
         '7': {
           $service_name = 'openvpn@openvpn'
