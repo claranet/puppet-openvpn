@@ -30,6 +30,6 @@ route <%= route %>
 <% end -%>
 persist-key
 persist-tun
-user nobody
-group nobody
+user <%= scope.lookupvar('openvpn::service_user') %>
+group <%= scope.lookupvar('openvpn::service_group') %> 
 
