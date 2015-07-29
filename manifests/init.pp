@@ -22,6 +22,8 @@ class openvpn (
   $client2client = false,
   $package_name  = $::openvpn::params::package_name,
   $service_name  = $::openvpn::params::service_name,
+  $service_user  = $::openvpn::params::service_user,
+  $service_group = $::openvpn::params::service_group,
 ) inherits ::openvpn::params {
 
   validate_array($routes)
