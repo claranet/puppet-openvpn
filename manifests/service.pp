@@ -12,4 +12,13 @@ class openvpn::service {
     hasstatus  => true,
     hasrestart => true,
   }
+
+  if $::openvpn::params::service_provider == 'systemd' {
+    augeas { 'auto-restart openvpn':
+      lens    => 'Systemd.lns',
+      incl    => '/lib/systemd/system/openvpn@.service',
+      changes => 'set /files/lib/systemd/system/openvpn@.service/Service/Restart/value on-failure',
+      notify  => Service[$::openvpn::service_name],
+    }
+  }
 }
