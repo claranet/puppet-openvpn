@@ -17,7 +17,7 @@ class openvpn::service {
     augeas { 'auto-restart openvpn':
       lens    => 'Systemd.lns',
       incl    => '/lib/systemd/system/openvpn@.service',
-      changes => 'set /files/lib/systemd/system/openvpn@.service/Service/Restart/value on-failure',
+      changes => 'set /files/lib/systemd/system/openvpn@.service/Service/Restart/value always',
       notify  => Service[$::openvpn::service_name],
     }
   }
