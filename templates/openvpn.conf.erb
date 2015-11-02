@@ -1,7 +1,7 @@
 ca /etc/openvpn/keys/ca.crt
 cert /etc/openvpn/keys/local.crt
 key /etc/openvpn/keys/local.key
-proto udp
+proto <%= scope.lookupvar('openvpn::protocol') %>
 comp-lzo
 dev tun
 <% if scope.lookupvar('openvpn::mode') == "server" -%>

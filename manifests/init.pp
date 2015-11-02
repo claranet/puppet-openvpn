@@ -13,6 +13,7 @@ class openvpn (
   $key,
   $dh            = undef,
   $mode          = 'client', # client or server
+  $protocol      = 'udp',
   $remote        = undef, # Needed only for client
   $network       = undef, # needed only for server
   $netmask       = undef,
