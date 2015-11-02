@@ -11,12 +11,14 @@ class openvpn (
   $ca_crt,
   $cert,
   $key,
+  $ta            = undef,
   $dh            = undef,
   $mode          = 'client', # client or server
   $protocol      = 'udp',
   $remote        = undef, # Needed only for client
   $network       = undef, # needed only for server
   $netmask       = undef,
+  $tlsdirection  = undef, # Only needed if TLS Auth is in use - use 0 or 1
   $routes        = [],
   $push          = [],
   $clientconfig  = {},

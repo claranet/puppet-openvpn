@@ -61,5 +61,12 @@ class openvpn::config {
     group   => 'root',
     content => $::openvpn::dh,
   }
+  file { '/etc/openvpn/keys/ta.key':
+    ensure  => present,
+    mode    => '0600',
+    owner   => 'root',
+    group   => 'root',
+    content => $::openvpn::ta,
+  }
 
 }
