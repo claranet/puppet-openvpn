@@ -15,6 +15,8 @@ class openvpn (
   $dh            = undef,
   $mode          = 'client', # client or server
   $protocol      = 'udp',
+  $cypher        = undef, # Specify specific CYPHER if required.
+  $nscerttype    = undef, # Specify ns-cert-type if required 
   $remote        = undef, # Needed only for client
   $network       = undef, # needed only for server
   $netmask       = undef,
