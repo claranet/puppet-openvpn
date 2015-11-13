@@ -9,6 +9,8 @@ mode server
 dh /etc/openvpn/keys/dh.pem
 tls-server
 port 1194
+status openvpn-status.log
+management localhost 7505
 server <%= scope.lookupvar('openvpn::network') %> <%= scope.lookupvar('openvpn::netmask') %>
 <% scope.lookupvar('openvpn::push').each do |push| -%>
 push <%= push %>
