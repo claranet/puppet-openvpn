@@ -48,8 +48,14 @@ class openvpn (
     }
   }
 
-  class { '::openvpn::install': } ->
-  class { '::openvpn::config': } ~>
-  class { '::openvpn::service': } ->
-  Class['::openvpn']
+  class { '::openvpn::install': }
+
+  class { '::openvpn::config':
+    require => Class['::openvpn::install'],
+  }
+
+  class { '::openvpn::service':
+    subscribe => Class['::openvpn::config'],
+  }
+
 }

@@ -24,6 +24,9 @@ class openvpn::params {
         'Ubuntu': {
           $service_provider = 'upstart'
         }
+        default: {
+          fail("Unsupported ${::osfamily} operating system: ${::operatingsystem}")
+        }
       }
     }
     'RedHat', 'Amazon': {

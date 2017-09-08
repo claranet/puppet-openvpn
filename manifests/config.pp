@@ -12,7 +12,7 @@ class openvpn::config {
   }
 
   file { '/etc/openvpn/openvpn.conf':
-    ensure  => present,
+    ensure  => file,
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
@@ -34,28 +34,28 @@ class openvpn::config {
   }
 
   file { '/etc/openvpn/keys/ca.crt':
-    ensure  => present,
+    ensure  => file,
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
     content => $::openvpn::ca_crt,
   }
   file { '/etc/openvpn/keys/local.crt':
-    ensure  => present,
+    ensure  => file,
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
     content => $::openvpn::cert,
   }
   file { '/etc/openvpn/keys/local.key':
-    ensure  => present,
+    ensure  => file,
     mode    => '0600',
     owner   => 'root',
     group   => 'root',
     content => $::openvpn::key,
   }
   file { '/etc/openvpn/keys/dh.pem':
-    ensure  => present,
+    ensure  => file,
     mode    => '0600',
     owner   => 'root',
     group   => 'root',
