@@ -1,38 +1,38 @@
 ---
+sudo: false
 language: ruby
-bundler_args: --without development system_tests
-before_install: rm Gemfile.lock || true
-rvm:
-  - 1.8.7
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
-script: bundle exec rake test
-env:
-  - PUPPET_VERSION="~> 2.7.0"
-  - PUPPET_VERSION="~> 3.2.0"
-  - PUPPET_VERSION="~> 3.3.0"
-  - PUPPET_VERSION="~> 3.4.0"
-  - PUPPET_VERSION="~> 3.5.0" STRICT_VARIABLES=yes
-  - PUPPET_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
-  - PUPPET_VERSION="~> 3.7.0" STRICT_VARIABLES=yes
-  - PUPPET_VERSION="~> 3.7.0" STRICT_VARIABLES=yes FUTURE_PARSER=yes
+dist: trusty
+cache: bundler
+before_install:
+  - bundle -v
+  - rm Gemfile.lock || true
+  - gem update --system
+  - gem update bundler
+  - gem --version
+  - bundle -v
+script:
+  - 'bundle exec rake $CHECK'
 matrix:
-  exclude:
-  # Ruby 1.9.3
-  - rvm: 1.9.3
-    env: PUPPET_VERSION="~> 2.7.0"
-    
-  # Ruby 2.0.0
-  - rvm: 2.0.0
-    env: PUPPET_VERSION="~> 2.7.0"
-    
-  # Ruby 2.1.0
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 2.7.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.2.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.3.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.4.0"
+  fast_finish: true
+  include:
+  - rvm: 2.4.1
+    bundler_args: --without system_tests development
+    env: PUPPET_VERSION="~> 4.6.0" CHECK=test STRICT_VARIABLES=yes
+  - rvm: 2.4.1
+    bundler_args: --without system_tests development
+    env: PUPPET_VERSION="~> 4.7.0" CHECK=test STRICT_VARIABLES=yes
+  - rvm: 2.4.1
+    bundler_args: --without system_tests development
+    env: PUPPET_VERSION="~> 4.8.0" CHECK=test STRICT_VARIABLES=yes
+  - rvm: 2.4.1
+    bundler_args: --without system_tests development
+    env: PUPPET_VERSION="~> 4.9.0" CHECK=test STRICT_VARIABLES=yes
+  - rvm: 2.4.1
+    bundler_args: --without system_tests development
+    env: PUPPET_VERSION="~> 4.10.0" CHECK=test STRICT_VARIABLES=yes
+  - rvm: 2.4.1
+    bundler_args: --without system_tests development
+    env: PUPPET_VERSION="~> 5.0.0" CHECK=test STRICT_VARIABLES=yes
+  - rvm: 2.4.1
+    bundler_args: --without system_tests development
+    env: PUPPET_VERSION="~> 5.1.0" CHECK=test STRICT_VARIABLES=yes

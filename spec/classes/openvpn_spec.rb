@@ -9,7 +9,7 @@ describe 'openvpn' do
         end
 
         context "openvpn class without any parameters" do
-          let(:params) {{ 
+          let(:params) {{
             :ca_crt  => 'foobar',
             :cert    => 'baz',
             :key     => 'example',
@@ -22,9 +22,9 @@ describe 'openvpn' do
           it { is_expected.to compile.with_all_deps }
 
           it { is_expected.to contain_class('openvpn::params') }
-          it { is_expected.to contain_class('openvpn::install').that_comes_before('openvpn::config') }
+          it { is_expected.to contain_class('openvpn::install').that_comes_before('Class[openvpn::config]') }
           it { is_expected.to contain_class('openvpn::config') }
-          it { is_expected.to contain_class('openvpn::service').that_subscribes_to('openvpn::config') }
+          it { is_expected.to contain_class('openvpn::service').that_subscribes_to('Class[openvpn::config]') }
 
           it { is_expected.to contain_package('openvpn').with_ensure('present') }
         end
