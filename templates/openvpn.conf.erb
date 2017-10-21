@@ -1,7 +1,7 @@
 ca /etc/openvpn/keys/ca.crt
 cert /etc/openvpn/keys/local.crt
 key /etc/openvpn/keys/local.key
-proto udp
+proto <%= scope.lookupvar('openvpn::protocol') %>
 comp-lzo
 dev tun
 <% if scope.lookupvar('openvpn::mode') == "server" -%>
@@ -32,4 +32,20 @@ persist-key
 persist-tun
 user <%= scope.lookupvar('openvpn::service_user') %>
 group <%= scope.lookupvar('openvpn::service_group') %> 
+
+<% if scope.lookupvar('openvpn::nscerttype') -%>
+ns-cert-type <%= scope.lookupvar('openvpn::nscerttype') %>
+<% end -%>
+
+<% if scope.lookupvar('openvpn::cypher') -%>
+cipher <%= scope.lookupvar('openvpn::cypher') %>
+<% end -%>
+
+<% if scope.lookupvar('openvpn::tlsdirection') == "0" -%>
+tls-auth /etc/openvpn/keys/ta.key 0
+<% end -%>
+
+<% if scope.lookupvar('openvpn::tlsdirection') == "1" -%>
+tls-auth /etc/openvpn/keys/ta.key 1
+<% end -%>
 
